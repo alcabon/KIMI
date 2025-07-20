@@ -340,3 +340,49 @@ That’s it—no local Java installs, no manual connector downloads.
 Happy streaming!
 
 ---
+
+On Windows you have two easy options:
+
+1. **Docker Desktop for Windows** (the usual choice)  
+   • Download `Docker Desktop Installer.exe` from https://docs.docker.com/desktop/install/windows-install/  
+   • Double-click → next-next-finish.  
+   • It bundles both **Docker Engine** and **docker-compose v2** (the `docker compose` CLI plugin).  
+   • After install open PowerShell or CMD and verify:  
+     ```
+     docker --version
+     docker compose version
+     ```
+   • You can now `docker compose up -d` anywhere.
+
+2. **No Desktop, just CLI** (rare)  
+   If you only want the CLI inside WSL2 or Git-Bash, you can grab the static binaries, but 99 % of Windows users simply run the installer above.
+
+So yes: **one .exe** → Docker Desktop → `docker` and `docker compose` commands are immediately available in any terminal.
+
+---
+
+No extra Java 11+ install is needed **because everything runs inside Docker**.  
+The images (`confluentinc/cp-*`) already contain the correct OpenJDK 11 runtime for:
+
+* Kafka broker  
+* ZooKeeper  
+* Kafka Connect worker  
+* The Salesforce connector JAR
+
+So on the **host OS (Windows)** you only need:
+
+1. Docker Desktop (one `.exe`)  
+2. A terminal (PowerShell, CMD, or Git Bash) to run `docker compose up`
+
+→ **Java is only inside the containers; your Windows machine stays Java-free.**
+
+---
+
+Exactly – the sentence was phrased for the **generic / non-Docker** case.
+
+* If you want to run **Kafka command-line tools locally** (e.g. `kafka-console-producer` outside of any container) then you need a **local Java 11+** on the host.  
+* If you stay **entirely inside Docker**, the Java runtime is already baked into the Confluent images, so you don’t need Java on the host at all.
+
+For this POC we stay 100 % in Docker, so you can ignore the host-Java requirement.
+
+---
