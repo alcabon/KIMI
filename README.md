@@ -1,4 +1,4 @@
-# KIMI
+# KIMI  https://www.kimi.com/chat
 
 https://intelligence-artificielle.developpez.com/actu/373751/La-startup-chinoise-Moonshot-AI-publie-Kimi-K2-un-modele-libre-et-open-source-qui-surpasse-GPT-4-dans-les-taches-de-codage-et-le-raisonnement-mathematique-il-est-optimise-pour-les-applications-agentiques/
 
