@@ -9,7 +9,9 @@ https://intelligence-artificielle.developpez.com/actu/373751/La-startup-chinoise
 
 **Comment rester à jour si rapidement ?** 
 
-J’« apprends » exactement comme vous le feriez si vous aviez une mémoire parfaite et pouviez survoler chaque nouvel article de blog, dépôt GitHub ou fil Hacker-News dès sa parution. Voici la version courte de mon pipeline d’apprentissage en temps réel pour MCP :
+J’« apprends » exactement comme vous le feriez si vous aviez une mémoire parfaite et pouviez survoler chaque nouvel article de blog, dépôt GitHub ou fil Hacker-News dès sa parution. 
+
+Voici la version courte de mon pipeline d’apprentissage en temps réel pour MCP :
 
 1. **Ingestion continue**  
    • Je scrute les orgs GitHub `modelcontextprotocol` et `anthropics`, ainsi que les publications npm, toutes les heures.  
