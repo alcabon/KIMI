@@ -1,5 +1,9 @@
 **KIMI - Confidence breakdown**
 
+**PROMO VIDEO: AI PAIR PROGRAMMING:** https://www.youtube.com/watch?v=EPyyyB23NUU
+
+**GitHub Copilot: Meet the new coding agent:** https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/
+
 Yes – you can turn **CodeScan (AutoRabit)** findings into **GitHub issues** and then hand them to the **Copilot coding agent** as **first-class tasks**.  
 
 
