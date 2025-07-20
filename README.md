@@ -1,6 +1,115 @@
 # KIMI  https://www.kimi.com/chat
 
 https://intelligence-artificielle.developpez.com/actu/373751/La-startup-chinoise-Moonshot-AI-publie-Kimi-K2-un-modele-libre-et-open-source-qui-surpasse-GPT-4-dans-les-taches-de-codage-et-le-raisonnement-mathematique-il-est-optimise-pour-les-applications-agentiques/
+
+---
+
+### 🏗️ MoE (Mixture-of-Experts) blueprint inside Kimi
+
+Below are the **publicly-released** architectural numbers for Kimi K2 and Kimi-VL.  
+All values come from Moonshot AI’s own repos or official docs, so they are **authoritative**.
+
+---
+
+#### 📊 Kimi K2 (text-only powerhouse)
+
+| Item | Value |
+|------|-------|
+| **Total parameters** | 1 **trillion** |
+| **Activated per token** | 32 **billion** |
+| **#Experts** | 384 |
+| **Experts chosen / token** | 8 |
+| **Layers** | 61 (1 dense + 60 MoE) |
+| **Attention heads** | 64 |
+| **Hidden dim (attention)** | 7 168 |
+| **Hidden dim (per expert)** | 2 048 |
+| **Context length** | 128 k tokens |
+| **Vocabulary size** | 160 k |
+| **Optimizer** | MuonClip (custom Muon variant)  |
+
+---
+
+#### 📸 Kimi-VL (vision-language variant)
+
+| Item | Value |
+|------|-------|
+| **Total parameters** | 16 **billion** |
+| **Activated per token** | 2.8 – 3 **billion** |
+| **Vision encoder** | MoonViT (native resolution) |
+| **Context length** | 128 k tokens |
+| **Use-case focus** | OCR, long-video, OS-agent, multimodal reasoning  |
+
+---
+
+#### 🔍 Key MoE design choices
+
+1. **Sparse activation**  
+   Only ~3 % of the 1 T weights are touched per token, cutting FLOPs dramatically while keeping accuracy on par with dense 100 B+ models.
+
+2. **Top-k routing**  
+   A lightweight gating network picks the best 8 experts out of 384 for each token; reinforcement-learning fine-tuning further refines these decisions.
+
+3. **MuonClip optimizer**  
+   A qk-clip trick stabilizes attention logits at trillion-parameter scale, eliminating the training instabilities usually seen in large MoE runs .
+
+4. **Shared expert**  
+   One “always-on” expert plus 8 dynamic ones balances generality and specialization.
+
+---
+
+#### 🚀 Practical impact
+
+- **Inference cost:** behaves like a ~32 B dense model despite the 1 T footprint.  
+- **Deployment:** already served via Fireworks AI serverless API at $0.6 / 1 M input tokens .  
+- **Open weights:** both K2-Base and K2-Instruct checkpoints are downloadable on Hugging Face under Apache-2.0.
+
+In short, Kimi’s MoE is a **trillion-parameter club with a 32-billion active membership card**—a blueprint now openly documented for the community.
+
+---
+
+Exact : la fenêtre de **Kimi K1.5** est en réalité **environ 128 k tokens** (≈ 200 000 *caractères* chinois, soit ~128 k *tokens* anglais).  
+J’ai corrigé la formulation pour éviter la confusion :
+
+- **128 k tokens** = 128 000 *tokens* ≈ 200 000 *caractères* (chinois ou mixte).  
+- Cela reste **10 × plus** que la plupart des concurrents (ex. : GPT-4o ≈ 32 k).  
+
+Merci pour la précision !
+
+---
+
+### 🚀 L’organisation interne révolutionnaire de **Kimi K1.5**
+
+Kimi K1.5, développé par **Moonshot AI**, est structuré autour de trois piliers qui le rendent **inédit** sur le marché mondial des IA :
+
+1. **Architecture multi-modale & mémoire étendue**  
+   - **Fenêtre de contexte de 200 000 caractères** (≈ 128 k tokens) soit **10 × plus** que la plupart des concurrents .  
+   - Traitement simultané de **texte + images** (jusqu’à 50 fichiers en une seule requête) .
+
+2. **Pipeline d’apprentissage par renforcement “Mirror Descent”**  
+   - Pas d’arbre de recherche lourd (MCTS) ;  
+   - Utilise un **sampling avancé** pour réutiliser intelligemment ses propres réponses et converger plus vite .
+
+3. **Connecteur web en temps réel**  
+   - **> 1 000 sites web** indexés en direct pour enrichir les réponses .  
+   - Permet des analyses financières ou de débogage à la volée (ex. : graphique NVIDIA + actualités croisées) .
+
+### 📊 Résultats spectaculaires
+
+| Benchmark        | Kimi K1.5 | GPT-4o | DeepSeek R1 |
+|------------------|-----------|--------|-------------|
+| AIME (math)      | **77.5**  | 63.8   | 71.9        |
+| MATH-500         | **96.2**  | 85.3   | 91.2        |
+| Codeforces %     | **94ᵉ**   | 82ᵉ    | 89ᵉ         |
+| MathVista (visu) | **74.9**  | 63.1   | 69.4        |
+
+> Kimi surpasse ainsi **OpenAI, DeepSeek et Qwen** sur des tâches complexes nécessitant un raisonnement profond .
+
+### 🧩 Accès gratuit
+
+- Interface web : [https://kimi.ai](https://kimi.ai)  
+- Pas de quota, **utilisation illimitée** .
+
+En résumé, l’organisation interne de Kimi combine **mémoire ultra-large**, **optimisation RL innovante** et **accès web en temps réel**, ce qui le place dès aujourd’hui comme **l’IA la plus avancée en raisonnement long et multi-modal** .
 ---
 
 “Kimi” n’est pas un acronyme officiel ; c’est simplement le prénom que Moonshot AI a choisi pour cette instance du modèle (en japonais « 君 » signifie « toi », mais ici c’est plutôt un nom de marque amical et mémorable).
