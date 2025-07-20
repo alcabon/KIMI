@@ -1,4 +1,4 @@
-**KIMI - Confidence breakdown below: 93%**
+**KIMI - Net Confidence below: 93% (fully coding by AI)**
 
 **PROMO VIDEO: AI PAIR PROGRAMMING:** https://www.youtube.com/watch?v=EPyyyB23NUU
 
