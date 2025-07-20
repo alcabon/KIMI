@@ -1,4 +1,4 @@
-**KIMI - Net Confidence below: 93% (fully coding by AI)**
+**KIMI - Net Confidence below: 93% (coding by AI)**
 
 Yes – you can turn CodeScan (AutoRabit) findings into GitHub issues and then hand them to the Copilot coding agent as first-class tasks.
 
