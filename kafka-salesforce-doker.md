@@ -850,3 +850,27 @@ echo "=== Kafka topics ===" \
 If the last line prints `"RUNNING"` for every task, the pipeline is healthy.
 
 ---
+
+Because the **Docker image already ships the full Kafka distribution** (`/usr/bin/kafka-*`) inside the container, every CLI tool is **instantly available** without installing anything locally.  
+In practice:
+
+1. **No local JDK or Kafka install** → you still run:
+   ```bash
+   docker exec -it <kafka-container> kafka-topics --bootstrap-server localhost:9092 --list
+   ```
+   The command is executed **inside the running container**, so the image’s own JDK and scripts are used.
+
+2. **If you prefer shorter commands** you can create **host aliases** (PowerShell function or shell alias) that wrap the `docker exec …` call, e.g.:
+
+   PowerShell
+   ```powershell
+   function kt { docker exec -it kafka kafka-topics --bootstrap-server localhost:9092 $args }
+   ```
+   then simply type:
+   ```powershell
+   kt --list
+   ```
+
+3. **Only install JDK 11+ locally** if you want to run **native binaries** (`kafka-console-producer.bat`, `kafka-topics.bat`, etc.) **outside** Docker—useful for IDEs, CI, or when Docker isn’t running. Otherwise, the Docker image already gives you **all commands “for free.”**
+
+---
