@@ -1,4 +1,5 @@
-Yes – you can turn CodeScan (AutoRabit) findings into GitHub issues and then hand them to the Copilot coding agent as **first-class tasks**.  
+Yes – you can turn **CodeScan (AutoRabit)** findings into** GitHub issues** and then hand them to the **Copilot coding agent** as **first-class tasks**.  
+
 Here is a concrete, end-to-end picture that uses the Model Context Protocol (MCP) and the existing GitHub integrations.
 
 ---
