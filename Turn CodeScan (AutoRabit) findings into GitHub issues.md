@@ -2,6 +2,9 @@
 
 **PROMO VIDEO: AI PAIR PROGRAMMING:** https://www.youtube.com/watch?v=EPyyyB23NUU
 
+<img width="495" height="316" alt="image" src="https://github.com/user-attachments/assets/e6c69c70-5a43-41b1-bbd5-9dad5f468cad" />
+
+
 **GitHub Copilot: Meet the new coding agent:** https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/
 
 Yes – you can turn **CodeScan (AutoRabit)** findings into **GitHub issues** and then hand them to the **Copilot coding agent** as **first-class tasks**.  
