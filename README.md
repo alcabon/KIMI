@@ -2,6 +2,10 @@
 
 https://intelligence-artificielle.developpez.com/actu/373751/La-startup-chinoise-Moonshot-AI-publie-Kimi-K2-un-modele-libre-et-open-source-qui-surpasse-GPT-4-dans-les-taches-de-codage-et-le-raisonnement-mathematique-il-est-optimise-pour-les-applications-agentiques/
 
+"Moonshot Labs has released the Kimi k2, a new state-of-the-art open-source model purpose-built for agentic tasks, a direct rival of Claude 4 Sonnet, but at ~one-tenth the cost. It is a non-thinking model with one trillion parameters and an approximate size of ~960 GB."
+
+https://composio.dev/blog/notes-on-kimi-k2
+
 ---
 
 ### 🏗️ MoE (Mixture-of-Experts) blueprint inside Kimi
