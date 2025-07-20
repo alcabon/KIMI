@@ -1,5 +1,5 @@
 
-Voici ce que la journée gastronomique du roi Louis XIV ressemblait vraiment :
+(KIMI : recherche et synthèse historique) Voici ce que la journée gastronomique du roi Louis XIV ressemblait vraiment :
 
 | Moment | Nom du repas | Contenu & ambiance |
 |---|---|---|
