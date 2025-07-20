@@ -24,3 +24,23 @@ Le protocole distinguait **trois niveaux de repas** :
 En résumé :  
 - **Oui**, les courtisans mangeaient **la même cuisine française de cour**, souvent sortie des **mêmes cuisines centrales** de Versailles.  
 - **Non**, ils ne la partageaient **pas directement** avec le roi ; protocole et hiérarchie réglaient **qui**, **quand** et **combien** de plats ils recevaient.
+
+---
+
+Absolument — les repas de cour de Louis XIV étaient à la fois un **spectacle politique** et un **gaspillage systématique**.  
+
+### 🍽️ Les ordres de grandeur  
+- **324 personnes** travaillaient dans le *Service de Bouche* rien que pour le roi.  
+- Un seul **Grand Couvert** pouvait mobiliser **jusqu’à quarante hommes** rien que pour porter les plats.  
+- Les tables étaient **si chargées** que l’on disposait les mets en motifs géométriques, la pièce centrale étant entourée de plus petits plats comme un tableau vivant.  
+
+### 💸 Coût & gaspillage  
+- **Scandaleux gaspillage** : une fois les plats présentés au roi puis « présentés » aux spectateurs, **la majeure partie finissait à la poubelle** ou était redistribuée aux domestiques de bas rang.  
+- Pour se faire une idée : en 1789, **35 millions de livres** (soit 1/15 des revenus de l’État) partaient chaque année dans **les seules dépenses de la cour** — héritage direct du modèle de Versailles inauguré sous Louis XIV.  
+
+### 🐢 Ingédients & logistique  
+- Les poissons et crustacés arrivaient **à 5 heures du matin** depuis la côte, dans des charrettes garnies de glace, juste pour être exposés puis jetés si le roi n’en voulait pas.  
+- Même des **tortues** figuraient au menu, accompagnées de riz, de truffes ou d’herbes du potager royal.  
+
+### ⚖️ Le paradoxe  
+Cette **cuisine-théâtre** servait moins à nourrir qu’à **afficher la puissance royale** : plus il y avait de plats inutiles, plus le prestige du monarque paraissait immense — au prix d’une **dette chronique** et d’un **mécontentement populaire** qui finira, un siècle plus tard, par coûter la tête à son héritier.
