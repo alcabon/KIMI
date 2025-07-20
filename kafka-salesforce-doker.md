@@ -757,3 +757,96 @@ That 10 MB ceiling is the **only hard limit** you need to respect when sizing Ka
 Staying at or below **10 MB** guarantees the connector’s Bulk API calls will never be blocked by Salesforce.
 
 ---
+
+Below are **copy-paste commands** you can run from any terminal (Windows PowerShell, CMD, Git-Bash, WSL, Linux) to **supervise** the POC while it is running.  
+They assume:
+
+- Docker containers are up (`docker compose up -d`)  
+- Docker ports are mapped to the host (`9092`, `8083`)  
+- Optional: you have a **local JDK 11+** if you want to use the native Kafka CLI
+
+---
+
+### 1. Container health & logs
+```bash
+# quick overview
+docker ps
+
+# logs for all services (Ctrl-C to exit)
+docker compose logs -f
+
+# only Kafka broker
+docker logs -f kafka
+
+# only Kafka Connect
+docker logs -f connect
+```
+
+---
+
+### 2. Kafka cluster topics & offsets
+```bash
+# list topics
+docker exec -it kafka kafka-topics --bootstrap-server localhost:9092 --list
+
+# describe topic (partitions, replicas, offsets, leader)
+docker exec -it kafka kafka-topics --bootstrap-server localhost:9092 --describe --topic orders-json
+
+# watch consumer lag (built-in)
+docker exec -it kafka kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group connect-sf-leads-sink
+```
+
+---
+
+### 3. Kafka Connect runtime
+```bash
+# list connectors
+curl -s http://localhost:8083/connectors | jq
+
+# status of the SF sink
+curl -s http://localhost:8083/connectors/sf-leads-sink/status | jq
+
+# tail connector logs
+docker logs -f connect | grep sf-leads-sink
+```
+
+---
+
+### 4. Produce / consume test messages (native CLI or Docker)
+```bash
+# produce a quick test line (inside container)
+docker exec -it kafka kafka-console-producer \
+  --broker-list localhost:9092 \
+  --topic orders-json
+
+# consume last 10 messages (inside container)
+docker exec -it kafka kafka-console-consumer \
+  --bootstrap-server localhost:9092 \
+  --topic orders-json \
+  --from-latest \
+  --max-messages 10
+```
+
+If you installed **JDK 11+** locally, you can omit `docker exec -it kafka …` and just run `kafka-console-producer --bootstrap-server localhost:9092 …`.
+
+---
+
+### 5. Salesforce side (quick smoke test)
+```bash
+# count newly created Leads in last hour via Salesforce CLI (needs `sfdx`)
+sfdx force:data:soql:query -q "SELECT COUNT() FROM Lead WHERE CreatedDate = LAST_N_HOURS:1"
+```
+
+---
+
+### 6. One-liner “traffic light” script
+```bash
+echo "=== Kafka topics ===" \
+&& docker exec kafka kafka-topics --bootstrap-server localhost:9092 --list \
+&& echo "=== Connector status ===" \
+&& curl -s http://localhost:8083/connectors/sf-leads-sink/status | jq '.tasks[].state'
+```
+
+If the last line prints `"RUNNING"` for every task, the pipeline is healthy.
+
+---
