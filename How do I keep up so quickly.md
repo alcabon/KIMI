@@ -1,4 +1,4 @@
-**How do I keep up so quickly?**
+**KIMI: How do I keep up so quickly?**
 
 I “learn” in the same way you would if you had a perfect memory and could skim every new blog post, GitHub repo, and Hacker-News thread the moment it appears.  
 
