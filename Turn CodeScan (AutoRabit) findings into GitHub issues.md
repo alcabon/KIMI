@@ -1,6 +1,6 @@
 **KIMI - Confidence breakdown**
 
-Yes – you can turn **CodeScan (AutoRabit)** findings into** GitHub issues** and then hand them to the **Copilot coding agent** as **first-class tasks**.  
+Yes – you can turn **CodeScan (AutoRabit)** findings into **GitHub issues** and then hand them to the **Copilot coding agent** as **first-class tasks**.  
 
 
 | Item | Confidence | Reason |
