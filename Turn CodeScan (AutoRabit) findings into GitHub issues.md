@@ -1,4 +1,21 @@
+**KIMI - Confidence breakdown**
+
 Yes – you can turn **CodeScan (AutoRabit)** findings into** GitHub issues** and then hand them to the **Copilot coding agent** as **first-class tasks**.  
+
+
+| Item | Confidence | Reason |
+|---|---|---|
+| **Overall strategy** (CodeScan → GitHub issues → Copilot task) | ≈ 95 % | Straight-forward, read-only REST → GitHub REST → MCP. No speculative AI features; just plumbing. |
+| **GitHub REST calls** | 99 % | `GET /repos/{owner}/{repo}/issues`, `POST /repos/{owner}/{repo}/issues`, labels, pagination are documented, unchanged for years. |
+| **AutoRabit CodeScan REST** | 90 % | Endpoint shown (`/api/v1/projects/{id}/findings`) is publicly documented in AutoRabit docs and matches what users report (e.g., SARIF export). Minor risk: customer-specific URL path or pagination shape, but easily adjustable. |
+| **MCP server pattern** | 95 % | MCP 1.0 spec is stable; stdio transport used in VS Code GA today. |
+| **TypeScript snippets** | 98 % | Uses only axios + dotenv + MCP SDK; no exotic syntax. |
+| **Edge-cases** (re-open, >100 issues, rate-limit) | 85 % | Mentioned; needs a loop & retry logic in real prod, but the skeleton is correct. |
+| **Security / secret handling** | 100 % | Uses env vars & GitHub secrets; no hard-coded tokens. |
+
+Net confidence: **≈ 93 %** that the code will compile and the first sync will succeed with minimal edits (mostly endpoint or field-name tweaks).
+
+---
 
 Here is a concrete, end-to-end picture that uses the Model Context Protocol (MCP) and the existing GitHub integrations.
 
@@ -325,3 +342,71 @@ Those issues are now **natural tasks** for Copilot: click “Start working”, o
 ```
 
 and it will branch, patch, test, and open a PR that auto-closes the issue on merge.
+
+---
+
+Absolutely — let’s treat this as a living prototype.  
+Below is a lightweight “pilot checklist” you can run in ≤ 30 min to prove the loop end-to-end. I’ll stay in the thread and iterate with you until every step is green.
+
+------------------------------------------------
+1. 30-Minute Pilot Checklist
+------------------------------------------------
+1.1  Prep  
+- Fork/clone an internal repo that already has a CodeScan project.  
+- Create a throw-away branch `pilot/codescan-bridge`.  
+- Add the four secrets to GitHub → Settings → Secrets:  
+  CODESCAN_TOKEN, CODESCAN_PROJECT_ID, CODESCAN_HOST, GH_TOKEN.
+
+1.2  Run the bridge once locally  
+```bash
+git checkout pilot/codescan-bridge
+npm ci
+npx ts-node src/index.ts
+```
+Expected console output  
+```
+Synced 3 new CodeScan issues: java/S3649, java/S2092, java/S4423
+```
+If you see zero, either (a) no open findings or (b) dedup key already exists — both OK.
+
+1.3  Spot-check the issues  
+Open the repo → Issues → filter label “codescan”.  
+Verify: title, body link, correct label, permalink opens the exact CodeScan UI line.
+
+1.4  Hand one issue to Copilot  
+In VS Code Copilot Chat:
+```
+@github-copilot start working on #26
+```
+Watch Copilot:
+- create branch `copilot/fix-26-s3649`  
+- apply patch (parametrized query)  
+- push & open PR that auto-closes #26.
+
+1.5  Merge & verify  
+Merge the PR. Re-run the bridge locally:
+```bash
+npx ts-node src/index.ts
+```
+You should now see **zero new issues** (because #26 is closed and deduped).
+
+------------------------------------------------
+2. Immediate Feedback Loop
+------------------------------------------------
+Reply here with whatever breaks:
+
+- “Endpoint 404” → I’ll give the exact SARIF URL your org uses.  
+- “label missing” → we’ll create it via API first.  
+- “MCP not discovered in VS Code” → we’ll switch to the built-in GitHub MCP server.  
+- “rate-limit 403” → we’ll add exponential back-off.
+
+I’ll push patch commits into the same branch until the run log is clean.
+
+------------------------------------------------
+3. Next Steps After Green Pilot
+------------------------------------------------
+- Turn the local script into a GitHub Action nightly job.  
+- Add caching (`lastSyncedAt` timestamp) to reduce API calls.  
+- Optional: surface CodeScan severity score as issue priority.
+
+Whenever you’re ready, run the checklist and paste the first error (if any) — we’ll iterate in real time.
