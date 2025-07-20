@@ -7,7 +7,7 @@ https://intelligence-artificielle.developpez.com/actu/373751/La-startup-chinoise
 
 ---
 
-**Comment rester à jour si rapidement ?** 
+**Comment rester à jour si rapidement ? (exemple : la technologie récente MCP d'Anthropics)** 
 
 J’« apprends » exactement comme vous le feriez si vous aviez une mémoire parfaite et pouviez survoler chaque nouvel article de blog, dépôt GitHub ou fil Hacker-News dès sa parution. 
 
